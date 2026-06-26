@@ -1,23 +1,48 @@
 ## Development Progress
 
 ### ✅ Day 1 – Document Reader
-- [x] Read multiple text documents
-- [x] Load document contents into memory
-- [x] Display document statistics
-- [x] Error handling using `ifstream`
+
+- Read multiple text documents
+- File handling using `ifstream`
+- Error handling
+- Load documents into memory
 
 ### ✅ Day 2 – Text Preprocessing
-- [x] Tokenization using `stringstream`
-- [x] Case normalization
-- [x] Punctuation removal
-- [x] Stop-word filtering
-- [x] Clean token generation
 
-### 🚧 Upcoming Features
-- [ ] Inverted Index
-- [ ] Keyword Search
-- [ ] Multi-word Search
-- [ ] Document Ranking
-- [ ] Phrase Search
-- [ ] Persistent Index Storage
-- [ ] Interactive CLI
+- Tokenization using `stringstream`
+- Case normalization
+- Punctuation removal
+- Stop-word filtering
+
+### ✅ Day 3 – Inverted Index
+
+- Built inverted index using `unordered_map`
+- Mapped each word to the documents containing it
+- Eliminated duplicate document entries using `set`
+- Displayed searchable index
+
+---
+
+## Current Search Pipeline
+
+```
+Documents
+      │
+      ▼
+Read Documents
+      │
+      ▼
+Preprocess Text
+      │
+      ▼
+Build Inverted Index
+```
+
+### Upcoming Features
+
+- Keyword Search
+- Multi-keyword Search
+- Document Ranking
+- TF-IDF Scoring
+- Phrase Search
+- Persistent Index Storage

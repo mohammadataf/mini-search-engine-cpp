@@ -3,9 +3,13 @@
 #include <vector>
 #include <sstream>
 #include <unordered_set>
+#include <unordered_map>
+#include <set>
 #include <cctype>
 
 using namespace std;
+
+// ---------------- STOP WORDS ----------------
 
 unordered_set<string> stopWords =
 {
@@ -19,22 +23,22 @@ unordered_set<string> stopWords =
     "in"
 };
 
+// ---------------- READ FILE ----------------
+
 string readFile(const string& filePath)
 {
     ifstream file(filePath);
 
-    if(!file.is_open())
+    if (!file.is_open())
     {
-        cout << "Cannot open "
-             << filePath << endl;
-
+        cout << "Cannot open " << filePath << endl;
         return "";
     }
 
     string content;
     string line;
 
-    while(getline(file,line))
+    while (getline(file, line))
     {
         content += line;
         content += " ";
@@ -45,13 +49,15 @@ string readFile(const string& filePath)
     return content;
 }
 
+// ---------------- CLEAN WORD ----------------
+
 string cleanWord(string word)
 {
     string result;
 
-    for(char ch : word)
+    for (char ch : word)
     {
-        if(isalnum(ch))
+        if (isalnum(ch))
         {
             result += tolower(ch);
         }
@@ -59,6 +65,8 @@ string cleanWord(string word)
 
     return result;
 }
+
+// ---------------- TOKENIZER ----------------
 
 vector<string> tokenize(string content)
 {
@@ -68,14 +76,14 @@ vector<string> tokenize(string content)
 
     string word;
 
-    while(ss >> word)
+    while (ss >> word)
     {
         word = cleanWord(word);
 
-        if(word.empty())
+        if (word.empty())
             continue;
 
-        if(stopWords.count(word))
+        if (stopWords.count(word))
             continue;
 
         words.push_back(word);
@@ -83,6 +91,48 @@ vector<string> tokenize(string content)
 
     return words;
 }
+
+// ---------------- BUILD INVERTED INDEX ----------------
+
+unordered_map<string, set<string>> buildIndex(const vector<string>& files)
+{
+    unordered_map<string, set<string>> index;
+
+    for (const string& file : files)
+    {
+        string content = readFile(file);
+
+        vector<string> words = tokenize(content);
+
+        for (const string& word : words)
+        {
+            index[word].insert(file);
+        }
+    }
+
+    return index;
+}
+
+// ---------------- DISPLAY INDEX ----------------
+
+void displayIndex(const unordered_map<string, set<string>>& index)
+{
+    cout << "\n========== INVERTED INDEX ==========\n\n";
+
+    for (const auto& entry : index)
+    {
+        cout << entry.first << " --> ";
+
+        for (const string& document : entry.second)
+        {
+            cout << document << " ";
+        }
+
+        cout << endl;
+    }
+}
+
+// ---------------- MAIN ----------------
 
 int main()
 {
@@ -93,25 +143,10 @@ int main()
         "documents/doc3.txt"
     };
 
-    for(const string& file : files)
-    {
-        cout << "=========================\n";
-        cout << "Document : " << file << "\n\n";
+    unordered_map<string, set<string>> index =
+        buildIndex(files);
 
-        string content = readFile(file);
-
-        vector<string> tokens =
-            tokenize(content);
-
-        cout << "Tokens:\n\n";
-
-        for(const string& token : tokens)
-        {
-            cout << token << endl;
-        }
-
-        cout << "\n";
-    }
+    displayIndex(index);
 
     return 0;
 }
