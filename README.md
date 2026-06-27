@@ -1,48 +1,28 @@
-## Development Progress
+## ✅ Module 4 – Interactive Search Engine
 
-### ✅ Day 1 – Document Reader
+### Features
+- Single keyword search
+- Interactive command-line interface
+- Query preprocessing using `cleanWord()`
+- Fast lookup using the inverted index
+- Handles invalid keywords gracefully
+- Continuous search until user enters `exit`
 
-- Read multiple text documents
-- File handling using `ifstream`
-- Error handling
-- Load documents into memory
+### Example
 
-### ✅ Day 2 – Text Preprocessing
+```text
+=====================================
+       MINI SEARCH ENGINE
+=====================================
 
-- Tokenization using `stringstream`
-- Case normalization
-- Punctuation removal
-- Stop-word filtering
+Search > programming
 
-### ✅ Day 3 – Inverted Index
+Found in:
 
-- Built inverted index using `unordered_map`
-- Mapped each word to the documents containing it
-- Eliminated duplicate document entries using `set`
-- Displayed searchable index
+documents/doc1.txt
+documents/doc2.txt
 
----
+Search > exit
 
-## Current Search Pipeline
-
+Thank you for using Mini Search Engine!
 ```
-Documents
-      │
-      ▼
-Read Documents
-      │
-      ▼
-Preprocess Text
-      │
-      ▼
-Build Inverted Index
-```
-
-### Upcoming Features
-
-- Keyword Search
-- Multi-keyword Search
-- Document Ranking
-- TF-IDF Scoring
-- Phrase Search
-- Persistent Index Storage
