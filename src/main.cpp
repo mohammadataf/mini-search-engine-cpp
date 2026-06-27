@@ -1,6 +1,7 @@
-#include "../include/reader.h"
-#include "../include/preprocess.h"
 #include "../include/indexer.h"
+#include "../include/search.h"
+
+#include <vector>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ int main()
 
     auto index = buildIndex(files);
 
-    displayIndex(index);
+    runSearchEngine(index);
 
     return 0;
 }
