@@ -1,28 +1,72 @@
-## ✅ Module 4 – Interactive Search Engine
+## 🚀 Features
 
-### Features
-- Single keyword search
-- Interactive command-line interface
-- Query preprocessing using `cleanWord()`
-- Fast lookup using the inverted index
-- Handles invalid keywords gracefully
-- Continuous search until user enters `exit`
+### ✅ Module 1 – Document Reader
 
-### Example
+* Reads multiple text documents from the `documents/` directory.
+* Uses `ifstream` for efficient file handling.
 
-```text
-=====================================
-       MINI SEARCH ENGINE
-=====================================
+### ✅ Module 2 – Text Preprocessing
 
-Search > programming
+* Converts all words to lowercase.
+* Removes punctuation and special characters.
+* Removes common stop words.
+* Tokenizes text into searchable keywords.
 
-Found in:
+### ✅ Module 3 – Inverted Index
 
-documents/doc1.txt
-documents/doc2.txt
+* Builds an inverted index using `unordered_map<string, set<string>>`.
+* Maps every keyword to the documents that contain it.
+* Enables fast keyword lookup.
 
-Search > exit
+### ✅ Module 4 – Interactive Search Engine
 
-Thank you for using Mini Search Engine!
+* Interactive command-line interface.
+* Single keyword search.
+* Handles invalid queries gracefully.
+* Continuous searching until the user exits.
+
+### ✅ Module 5 – Advanced Multi-Keyword Search
+
+* Supports multi-word queries.
+* OR Search (documents containing any keyword).
+* AND Search (documents containing all keywords).
+* Automatic duplicate removal using `std::set`.
+* Uses `std::set_intersection()` for efficient AND search.
+* Robust input validation for search mode selection.
+
+---
+
+## 🏗️ Project Structure
+
 ```
+MiniSearchEngine/
+│
+├── documents/
+│
+├── include/
+│   ├── reader.h
+│   ├── preprocess.h
+│   ├── indexer.h
+│   └── search.h
+│
+├── src/
+│   ├── reader.cpp
+│   ├── preprocess.cpp
+│   ├── indexer.cpp
+│   ├── search.cpp
+│   └── main.cpp
+│
+└── README.md
+```
+
+---
+
+## 🛠️ Technologies Used
+
+* C++17
+* STL (`unordered_map`, `set`, `vector`)
+* File Handling (`ifstream`)
+* Modular Project Architecture
+* Inverted Index
+* Set Union
+* Set Intersection
