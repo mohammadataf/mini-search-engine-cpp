@@ -1,72 +1,45 @@
-## 🚀 Features
+# Mini Search Engine (C++)
 
-### ✅ Module 1 – Document Reader
+A simple search engine built in C++ that indexes multiple text documents and supports fast keyword-based search using an inverted index.
 
-* Reads multiple text documents from the `documents/` directory.
-* Uses `ifstream` for efficient file handling.
+The project started as a way to understand how search engines work internally and gradually evolved into a modular application with separate components for reading documents, preprocessing text, indexing, and searching.
 
-### ✅ Module 2 – Text Preprocessing
+## Features
 
-* Converts all words to lowercase.
-* Removes punctuation and special characters.
+* Reads multiple text documents from disk.
+* Cleans and tokenizes text.
 * Removes common stop words.
-* Tokenizes text into searchable keywords.
-
-### ✅ Module 3 – Inverted Index
-
-* Builds an inverted index using `unordered_map<string, set<string>>`.
-* Maps every keyword to the documents that contain it.
-* Enables fast keyword lookup.
-
-### ✅ Module 4 – Interactive Search Engine
-
+* Builds an inverted index for fast lookups.
+* Supports single-keyword search.
+* Supports multi-keyword **OR** search.
+* Supports multi-keyword **AND** search.
 * Interactive command-line interface.
-* Single keyword search.
-* Handles invalid queries gracefully.
-* Continuous searching until the user exits.
+* Modular project structure using separate header and source files.
 
-### ✅ Module 5 – Advanced Multi-Keyword Search
-
-* Supports multi-word queries.
-* OR Search (documents containing any keyword).
-* AND Search (documents containing all keywords).
-* Automatic duplicate removal using `std::set`.
-* Uses `std::set_intersection()` for efficient AND search.
-* Robust input validation for search mode selection.
-
----
-
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 MiniSearchEngine/
 │
 ├── documents/
-│
 ├── include/
-│   ├── reader.h
-│   ├── preprocess.h
-│   ├── indexer.h
-│   └── search.h
-│
 ├── src/
-│   ├── reader.cpp
-│   ├── preprocess.cpp
-│   ├── indexer.cpp
-│   ├── search.cpp
-│   └── main.cpp
-│
 └── README.md
 ```
 
----
-
-## 🛠️ Technologies Used
+## Technologies
 
 * C++17
-* STL (`unordered_map`, `set`, `vector`)
-* File Handling (`ifstream`)
-* Modular Project Architecture
-* Inverted Index
-* Set Union
-* Set Intersection
+* Standard Template Library (STL)
+* File Handling
+* Hash Maps (`unordered_map`)
+* Sets
+* Modular Programming
+
+## Future Improvements
+
+* Document ranking based on relevance
+* Phrase search
+* TF-IDF scoring
+* GUI version
+* Web interface
