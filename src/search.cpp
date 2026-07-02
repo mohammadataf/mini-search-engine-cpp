@@ -185,6 +185,43 @@ set<string> searchWord(
     return it->second;
 }
 
+set<string> searchPhrase(
+    const unordered_map<string, set<string>>& index,
+    const string& phrase)
+{
+    set<string> result;
+    set<string> allDocuments;
+
+    // Collect all unique document names
+    for(const auto& entry : index)
+    {
+        allDocuments.insert(
+            entry.second.begin(),
+            entry.second.end()
+        );
+    }
+
+    // Check every document
+    for(const string& document : allDocuments)
+    {
+        string content = readFile(document);
+
+        transform(
+            content.begin(),
+            content.end(),
+            content.begin(),
+            ::tolower
+        );
+
+        if(content.find(phrase) != string::npos)
+        {
+            result.insert(document);
+        }
+    }
+
+    return result;
+}
+
 //-----------------------------------------------------
 // Interactive Search Engine
 //-----------------------------------------------------
@@ -217,12 +254,50 @@ void runSearchEngine(
             keywords.end()
         );
 
-        vector<pair<string,int>> results =
-            rankDocuments(index, query);
+      if(query.size() >= 2 &&
+   query.front() == '"' &&
+   query.back() == '"')
+{
+    string phrase = query.substr(1, query.length() - 2);
 
-        displayRankedResults(
-            results,
-            uniqueWords.size()
-        );
+   set<string> results = searchPhrase(index, phrase);
+
+if(results.empty())
+{
+    cout << "\nNo documents found.\n";
+}
+else
+{
+    cout << "\n========== RESULTS ==========\n\n";
+
+    int rank = 1;
+
+    for(const string& document : results)
+    {
+        cout << rank << ". "
+             << document
+             << "\n\n";
+
+        rank++;
+    }
+}
+}
+else
+{
+    vector<string> keywords = tokenize(query);
+
+    set<string> uniqueWords(
+        keywords.begin(),
+        keywords.end()
+    );
+
+    vector<pair<string,int>> results =
+        rankDocuments(index, query);
+
+    displayRankedResults(
+        results,
+        uniqueWords.size()
+    );
+}
     }
 }

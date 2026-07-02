@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 #include <utility>
+#include "../include/reader.h"
 
 std::set<std::string> searchWord(
     const std::unordered_map<
@@ -25,6 +26,12 @@ std::set<std::string> searchWordsAND(
         std::string,
         std::set<std::string>>& index,
     const std::string& query
+);
+std::set<std::string> searchPhrase(
+    const std::unordered_map<
+        std::string,
+        std::set<std::string>>& index,
+    const std::string& phrase
 );
 
 std::vector<std::pair<std::string,int>> rankDocuments(
